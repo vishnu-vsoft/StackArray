@@ -22,19 +22,19 @@
         }
     }
 
-    public int? pop()
+    public void pop()
     {
         if (top == -1)
         {
             Console.WriteLine("Empty");
-            return null;
+            return;
         }
         else
         {
             int item = stack[top];
             popDisplay();
             top--;
-            return item;
+            
         }
     }
 
@@ -43,6 +43,7 @@
         
         if (top == -1)
         {
+            Console.WriteLine("Empty");
             return;
         }
         Console.WriteLine($"Deleted stack element is {stack[top]}");
@@ -60,9 +61,7 @@
             {
                 Console.WriteLine(stack[i]);
             }
-        }
-        
-        
+        }   
     }
 }
 
@@ -72,11 +71,16 @@ class StackArray
     {
         Console.WriteLine("Enter your stack size");
         int size = Convert.ToInt32(Console.ReadLine());
+        
         Stack stack = new Stack(size);
         stack.push(1);
         stack.push(15);
         stack.push(07);
         stack.push(34);
+        stack.pop();
+        stack.pop();
+        stack.pop();
+        stack.pop();
         stack.push(54);
         stack.push(17);
         stack.Display();
@@ -86,9 +90,7 @@ class StackArray
         stack.pop();
         stack.pop();
         stack.pop();
-        stack.pop();
-        stack.pop();
-        stack.pop();
+        
         stack.Display();
     }
 }
