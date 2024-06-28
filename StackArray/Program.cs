@@ -1,8 +1,8 @@
-﻿ class Stack
+﻿class Stack
 {
     private int[] stack;
     private int top;
-    //privte int bottom;
+    
     private int max;
     public Stack(int size)
     {
@@ -13,10 +13,11 @@
 
     public void push(int item)
     {
-        if(top == max- 1)
+        if (top == max - 1)
         {
             Console.WriteLine("Stack is full");
-        }else
+        }
+        else
         {
             stack[++top] = item;
         }
@@ -26,7 +27,7 @@
     {
         if (top == -1)
         {
-            Console.WriteLine("Empty");
+            Console.WriteLine("Empty Stack");
             return;
         }
         else
@@ -34,23 +35,17 @@
             int item = stack[top];
             popDisplay();
             top--;
-            
+
         }
     }
 
     public void popDisplay()
     {
-        
-        if (top == -1)
-        {
-            Console.WriteLine("Empty");
-            return;
-        }
         Console.WriteLine($"Deleted stack element is {stack[top]}");
     }
     public void Display()
     {
-        if(top == -1)
+        if (top == -1)
         {
             Console.WriteLine("Stack is empty");
         }
@@ -61,36 +56,73 @@
             {
                 Console.WriteLine(stack[i]);
             }
-        }   
+        }
     }
+}
+
+
+class StackNewApproach
+{
+    private int[] stack;
+    private int top;
+    private bool Full;
+    private int max;
+    public StackNewApproach(int size)
+    {
+        max = size;
+        top = 0;
+        stack = new int[size];
+        Full = false;
+    }
+
+    public void push(int item)
+    {
+        stack[top] = item;
+        top = increment(top);
+        if (top == 0) Full = true;
+    }
+
+    public int pop()
+    {
+        if (top == 0 && !Full) throw new Exception("stack empty");
+        
+        if(Full) Full = false;
+        top = increment(top);
+        return stack[top]; 
+    }
+
+    private int increment(int topValue)
+    {
+        return (++topValue % max);
+    }
+
+    
+
+
+         
+    
 }
 
 class StackArray
 {
     public static void Main()
     {
-        Console.WriteLine("Enter your stack size");
-        int size = Convert.ToInt32(Console.ReadLine());
-        
-        Stack stack = new Stack(size);
+        //Console.WriteLine("Enter your stack size");
+        //int size = Convert.ToInt32(Console.ReadLine());
+        int item = 0;
+        StackNewApproach stack = new StackNewApproach(2);
         stack.push(1);
-        stack.push(15);
-        stack.push(07);
-        stack.push(34);
+        //stack.push(15);
+        //stack.push(07);
+        //stack.push(34);
+        item = stack.pop();
+        stack.pop();
+        //stack.pop();
+        stack.push(35);
         stack.pop();
         stack.pop();
-        stack.pop();
-        stack.pop();
-        stack.push(54);
-        stack.push(17);
-        stack.Display();
-        stack.pop();
-        stack.pop();
-        stack.pop();
-        stack.pop();
-        stack.pop();
-        stack.pop();
+        stack.push(36);
+        stack.push(37);
         
-        stack.Display();
     }
 }
